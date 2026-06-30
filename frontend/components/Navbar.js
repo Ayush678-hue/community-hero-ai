@@ -137,12 +137,12 @@ export default function Navbar() {
             </button>
           </div>
         ) : (
-          <button
-            onClick={() => toggleRole('citizen')}
+          <Link
+            href="/login"
             className="glow-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5"
           >
             Portal Login
-          </button>
+          </Link>
         )}
       </div>
     </nav>

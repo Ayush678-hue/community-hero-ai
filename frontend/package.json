@@ -12,6 +12,7 @@
     "canvas-confetti": "^1.9.3",
     "chart.js": "^4.4.2",
     "clsx": "^2.1.0",
+    "firebase": "^12.15.0",
     "framer-motion": "^11.1.7",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.368.0",

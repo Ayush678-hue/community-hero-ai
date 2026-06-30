@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useStore } from '../../store/useStore';
 import { Shield, Hammer, MapPin, CheckCircle2, TrendingUp, AlertTriangle, HammerIcon, BarChart2 } from 'lucide-react';
+import AuthGuard from '../../components/AuthGuard';
 
 const LeafletMap = dynamic(() => import('../../components/LeafletMap'), { ssr: false });
 
@@ -119,7 +120,8 @@ export default function AuthorityDashboard() {
   };
 
   return (
-    <div className="space-y-6 py-6 font-sans">
+    <AuthGuard allowedRoles={['authority']}>
+      <div className="space-y-6 py-6 font-sans">
       
       {}
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-editorial-border pb-6">
@@ -361,9 +363,9 @@ export default function AuthorityDashboard() {
               <LeafletMap complaints={complaints} heatmapMode={true} onViewportChange={handleViewportChange} />
             </div>
           )}
-        </div>
-
       </div>
-    </div>
+      </div>
+      </div>
+    </AuthGuard>
   );
 }

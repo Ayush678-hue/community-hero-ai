@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useStore } from '../../store/useStore';
 import { Camera, MapPin, Mic, CheckCircle, RefreshCw, Trophy, Award, Navigation } from 'lucide-react';
+import AuthGuard from '../../components/AuthGuard';
 
 const LeafletMap = dynamic(() => import('../../components/LeafletMap'), { ssr: false });
 
@@ -191,7 +192,8 @@ export default function CitizenDashboard() {
   };
 
   return (
-    <div className="space-y-6 py-6 font-sans">
+    <AuthGuard allowedRoles={['citizen']}>
+      <div className="space-y-6 py-6 font-sans">
       {}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-editorial-border pb-6">
         <div>
@@ -461,6 +463,7 @@ export default function CitizenDashboard() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AuthGuard>
   );
 }
