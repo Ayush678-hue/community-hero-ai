@@ -6,12 +6,12 @@ import { ArrowLeft, Brain, Cpu, ShieldAlert, Eye } from 'lucide-react';
 export default function AIComputerVisionPage() {
   return (
     <div className="space-y-8 py-10 max-w-4xl mx-auto font-sans select-none">
-      {/* Back button */}
+      {}
       <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-editorial-accent hover:underline">
         <ArrowLeft className="w-4 h-4" /> Back to Terminal Hub
       </Link>
 
-      {/* Header */}
+      {}
       <div className="flex items-center gap-4 border-b border-editorial-border pb-6">
         <div className="w-14 h-14 rounded-2xl bg-editorial-dark flex items-center justify-center shadow-lg">
           <Brain className="w-6 h-6 text-editorial-bg" />
@@ -22,10 +22,10 @@ export default function AIComputerVisionPage() {
         </div>
       </div>
 
-      {/* Deep-dive content */}
+      {}
       <div className="grid md:grid-cols-12 gap-8">
         
-        {/* Left main text column */}
+        {}
         <div className="md:col-span-8 space-y-6">
           <div className="glass-panel p-6 rounded-3xl border border-editorial-border space-y-4 shadow-editorial">
             <h2 className="text-xl font-serif font-bold text-editorial-dark flex items-center gap-2">
@@ -72,7 +72,7 @@ export default function AIComputerVisionPage() {
           </div>
         </div>
 
-        {/* Right HUD column */}
+        {}
         <div className="md:col-span-4 space-y-6">
           <div className="glass-panel p-5 rounded-2xl border border-editorial-border bg-slate-50 font-mono text-[9px] space-y-3">
             <div className="flex items-center justify-between border-b border-editorial-border pb-2 text-editorial-accent font-bold">
@@ -80,7 +80,7 @@ export default function AIComputerVisionPage() {
               <span className="w-1.5 h-1.5 bg-editorial-accent rounded-full animate-pulse"></span>
             </div>
             <div className="space-y-1 text-slate-500">
-              <p className="text-slate-400">// Tensor dimensions: 640x640</p>
+              <p className="text-slate-400"></p>
               <p>image = cv2.imread(img_path)</p>
               <p>results = yolo_model.predict(image)</p>
               <p className="mt-2 text-red-700 font-bold">Pothole: 94.2% conf</p>
@@ -95,7 +95,7 @@ export default function AIComputerVisionPage() {
               <span>🔍 opencv_ssim_verify</span>
             </div>
             <div className="space-y-1 text-slate-500">
-              <p className="text-slate-400">// SSIM comparison score</p>
+              <p className="text-slate-400"></p>
               <p>score = structural_similarity(img1, img2)</p>
               <p className="mt-2">Output score: <span className="text-editorial-success font-bold">0.89</span></p>
               <p className="text-[8px] text-slate-400">Status: REPAIR_VALIDATED</p>

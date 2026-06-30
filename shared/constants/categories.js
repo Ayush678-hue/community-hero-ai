@@ -1,4 +1,4 @@
-// Shared configuration constants for Community Hero AI
+
 
 const ISSUES = [
   'Pothole',

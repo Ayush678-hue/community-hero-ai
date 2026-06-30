@@ -4,15 +4,15 @@ exports.getHeatmapData = async (req, res, next) => {
   try {
     const complaints = await Complaint.find({}).select('location severity issueType status');
     
-    // Format into Leaflet Heatmap compliant structure
+    
     const heatmapPoints = complaints.map(c => {
-      // Map severity to weight intensity
+      
       let weight = 0.3;
       if (c.severity === 'Medium') weight = 0.5;
       if (c.severity === 'High') weight = 0.8;
       if (c.severity === 'Critical') weight = 1.0;
 
-      // Extract coords [lng, lat]
+      
       return {
         lat: c.location.coordinates[1],
         lng: c.location.coordinates[0],
@@ -37,12 +37,12 @@ exports.getDashboardStats = async (req, res, next) => {
     const verified = await Complaint.countDocuments({ status: 'Verified' });
     const reported = await Complaint.countDocuments({ status: 'Reported' });
 
-    // Group by category counts
+    
     const categoryStats = await Complaint.aggregate([
       { $group: { _id: '$issueType', count: { $sum: 1 } } }
     ]);
 
-    // Group by department workload counts
+    
     const departmentStats = await Complaint.aggregate([
       { $group: { _id: '$assignedDepartment', count: { $sum: 1 } } }
     ]);

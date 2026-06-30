@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full glass-panel border-b border-editorial-border py-4 px-6 md:px-12 flex justify-between items-center select-none">
-      {/* Brand Logo - Luxury styling */}
+      {}
       <div className="flex items-center gap-2">
         <div className="w-9 h-9 rounded-xl bg-editorial-dark flex items-center justify-center shadow-lg">
           <Flame className="w-5 h-5 text-editorial-bg animate-pulse" />
@@ -45,7 +45,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Center Links */}
+      {}
       <div className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-editorial-dark/70">
         <Link href="/" className="hover:text-editorial-accent transition-colors">
           Home
@@ -62,9 +62,9 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Right widgets */}
+      {}
       <div className="flex items-center gap-4">
-        {/* Hackathon Role Switcher */}
+        {}
         <div className="flex bg-slate-200/60 p-0.5 rounded-xl border border-editorial-border text-[10px] gap-0.5 font-bold">
           <button
             onClick={() => toggleRole('citizen')}

@@ -13,24 +13,24 @@ export default function CitizenDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [userCreatedComplaints, setUserCreatedComplaints] = useState([]);
   
-  // Form State
+  
   const [issueType, setIssueType] = useState('Pothole');
   const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: 37.7749, lng: -122.4194 }); // default SF
+  const [coordinates, setCoordinates] = useState({ lat: 37.7749, lng: -122.4194 }); 
   
-  // AI Preview Panel
+  
   const [aiPreview, setAiPreview] = useState(null);
 
-  // Sync form coordinates
+  
   useEffect(() => {
     if (userCoords) {
       setCoordinates({ lat: userCoords[0], lng: userCoords[1] });
     }
   }, [userCoords]);
 
-  // Handle viewport bounds updates to dynamically generate mock complaints
+  
   const handleViewportChange = (bounds, center) => {
     if (!bounds || !center) return;
     const southWest = bounds.getSouthWest();
@@ -192,7 +192,7 @@ export default function CitizenDashboard() {
 
   return (
     <div className="space-y-6 py-6 font-sans">
-      {/* Page Header - Editorial serif */}
+      {}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-editorial-border pb-6">
         <div>
           <h1 className="text-3xl md:text-5xl font-serif text-editorial-dark">Citizen Hub</h1>
@@ -206,9 +206,9 @@ export default function CitizenDashboard() {
         </button>
       </div>
 
-      {/* Main Grid */}
+      {}
       <div className="grid lg:grid-cols-12 gap-6 items-start">
-        {/* Left Column: Feed & Leaderboard */}
+        {}
         <div className="lg:col-span-5 space-y-6">
           <div className="glass-panel p-6 rounded-3xl border border-editorial-border space-y-4 shadow-editorial">
             <h2 className="text-lg font-serif font-bold text-editorial-dark flex items-center gap-2">
@@ -252,7 +252,7 @@ export default function CitizenDashboard() {
                       </div>
 
                       <div className="text-[11px] bg-slate-100/50 border border-editorial-border rounded-xl p-2.5 text-slate-500 font-mono">
-                        <span className="font-bold text-editorial-accent block mb-0.5">// AI Smart Summary:</span>
+                        <span className="font-bold text-editorial-accent block mb-0.5"></span>
                         {c.aiAnalysis?.summary}
                       </div>
 
@@ -279,7 +279,7 @@ export default function CitizenDashboard() {
             </div>
           </div>
 
-          {/* Mini-Leaderboard */}
+          {}
           <div className="glass-panel p-6 rounded-3xl border border-editorial-border shadow-editorial">
             <h2 className="text-lg font-serif font-bold text-editorial-dark flex items-center gap-2 mb-4">
               <Trophy className="w-5 h-5 text-yellow-600" />
@@ -305,13 +305,13 @@ export default function CitizenDashboard() {
           </div>
         </div>
 
-        {/* Right Column: Live Map */}
+        {}
         <div className="lg:col-span-7 h-[650px]">
           <LeafletMap complaints={complaints} heatmapMode={false} onViewportChange={handleViewportChange} />
         </div>
       </div>
 
-      {/* Report Issue Modal Overlay */}
+      {}
       {showReportModal && (
         <div className="fixed inset-0 z-[9999] bg-editorial-dark/30 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="w-full max-w-2xl glass-panel rounded-3xl border border-editorial-border p-6 md:p-8 space-y-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
@@ -440,7 +440,7 @@ export default function CitizenDashboard() {
                 </div>
               </div>
 
-              {/* Submit Buttons */}
+              {}
               <div className="flex gap-4 border-t border-editorial-border pt-4 justify-end font-bold">
                 <button
                   type="button"

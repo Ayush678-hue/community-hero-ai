@@ -18,7 +18,7 @@ export default function LandingPage() {
   const [heroesCount, setHeroesCount] = useState(542);
   const [feedIndex, setFeedIndex] = useState(0);
 
-  // Dynamic ticking counters for live demo simulation
+  
   useEffect(() => {
     const counterInterval = setInterval(() => {
       setReportsCount(prev => prev + (Math.random() > 0.65 ? 1 : 0));
@@ -50,18 +50,18 @@ export default function LandingPage() {
   return (
     <div className="relative min-h-[90vh] flex flex-col items-center py-10 md:py-16 gap-12 max-w-5xl mx-auto overflow-hidden">
       
-      {/* Editorial Grid Background */}
+      {}
       <div className="absolute inset-0 -z-10 pointer-events-none opacity-25">
         <div className="w-full h-full bg-[linear-gradient(rgba(28,29,31,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(28,29,31,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
       </div>
 
-      {/* Hero Badge */}
+      {}
       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-editorial-dark/5 border border-editorial-border text-editorial-dark text-[10px] font-bold uppercase tracking-widest select-none">
         <Sparkles className="w-3.5 h-3.5 text-editorial-accent animate-pulse" />
         Futuristic Civic Intelligence Operating System
       </div>
 
-      {/* Value Proposition Section */}
+      {}
       <div className="space-y-6 text-center">
         <h1 className="text-5xl md:text-8xl font-serif text-editorial-dark tracking-tight leading-[1.1] max-w-4xl mx-auto">
           Empowering Communities <br />
@@ -72,7 +72,7 @@ export default function LandingPage() {
         </p>
       </div>
 
-      {/* Tactile Pill-Style CTAs */}
+      {}
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
         <Link 
           href="/citizen" 
@@ -92,11 +92,11 @@ export default function LandingPage() {
         </Link>
       </div>
 
-      {/* Luxury Immersive 3D/Perspective HUD Terminal Display */}
+      {}
       <div className="w-full glass-panel border border-editorial-border rounded-3xl p-6 md:p-8 flex flex-col md:flex-row gap-8 shadow-editorial relative overflow-hidden select-none hover:shadow-2xl transition-shadow duration-500">
         <div className="absolute inset-0 bg-gradient-to-tr from-editorial-accent/3 via-transparent to-transparent -z-10"></div>
         
-        {/* Left terminal metadata */}
+        {}
         <div className="md:col-span-6 space-y-4 flex-1">
           <span className="text-[10px] text-editorial-accent font-extrabold tracking-widest uppercase">System Telemetry</span>
           <h2 className="text-3xl font-serif text-editorial-dark leading-tight">
@@ -117,12 +117,12 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Right 3D Perspective Graphic Wrapper */}
+        {}
         <div className="md:col-span-6 flex-1 h-56 relative bg-slate-100/50 rounded-2xl border border-editorial-border flex items-center justify-center [perspective:800px] overflow-hidden">
-          {/* Laser scanning strip */}
+          {}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-editorial-accent/8 to-transparent animate-laser-scan -z-10"></div>
           
-          {/* 3D Floating perspective card */}
+          {}
           <div className="w-56 h-36 rounded-2xl bg-white border border-editorial-border shadow-xl p-4 flex flex-col justify-between [transform:rotateX(20deg)_rotateY(-15deg)] hover:[transform:rotateX(10deg)_rotateY(-5deg)] transition-transform duration-700 hover:shadow-2xl">
             <div className="flex justify-between items-center text-[9px] font-bold">
               <span className="bg-red-500/10 text-red-700 border border-red-500/25 px-2 py-0.5 rounded">CRITICAL HAZARD</span>
@@ -142,7 +142,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Editorial Stats Dashboard Grid */}
+      {}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-2">
         {[
           { label: 'Reports Logged', value: reportsCount.toLocaleString(), trend: '+3 today', color: 'text-editorial-accent' },
@@ -170,7 +170,7 @@ export default function LandingPage() {
         ))}
       </div>
 
-      {/* Live Community Activity Ticker */}
+      {}
       <div className="w-full glass-panel border border-editorial-border rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 select-none shadow-sm hover:shadow-md transition-shadow">
         <div className="flex items-center gap-2 min-w-[160px]">
           <Activity className="w-4 h-4 text-editorial-alert animate-pulse" />
@@ -202,7 +202,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Feature cards Grid */}
+      {}
       <div className="w-full space-y-4 text-left mt-4 select-none">
         <h2 className="text-2xl md:text-3xl font-serif text-editorial-dark text-center mb-8">
           Intelligent Civic Features

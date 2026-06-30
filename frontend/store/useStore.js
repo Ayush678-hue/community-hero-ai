@@ -1,16 +1,16 @@
 import { create } from 'zustand';
 
 export const useStore = create((set) => ({
-  // Authentication State
+  
   token: null,
   user: null,
   isAuthenticated: false,
   
-  // Geolocation State (Set to null initially to trigger browser geolocation)
+  
   userCoords: null,
   locationAccuracy: null,
   
-  // Complaints & Notifications Lists
+  
   complaints: [],
   notifications: [],
   leaderboard: [],
@@ -25,7 +25,7 @@ export const useStore = create((set) => ({
     departments: []
   },
 
-  // Actions
+  
   setToken: (token) => set({ token, isAuthenticated: !!token }),
   setUser: (user) => set({ user }),
   setUserCoords: (coords) => set({ userCoords: coords }),
@@ -72,7 +72,7 @@ export const useStore = create((set) => ({
   setLeaderboard: (leaderboard) => set({ leaderboard }),
   setStats: (stats) => set({ stats }),
 
-  // Award points animation utility helper
+  
   awardPoints: (amount) => set((state) => {
     if (!state.user) return {};
     const updatedUser = { ...state.user, heroPoints: state.user.heroPoints + amount };

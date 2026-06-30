@@ -12,7 +12,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
   const [searchQuery, setSearchQuery] = useState('');
   const [searching, setSearching] = useState(false);
 
-  // References
+  
   const mapRef = useRef(null);
   const userMarkerRef = useRef(null);
   const accuracyCircleRef = useRef(null);
@@ -20,7 +20,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
   const circlesRef = useRef([]);
   const markersRef = useRef([]);
 
-  // Load Leaflet dynamically
+  
   useEffect(() => {
     import('leaflet').then((leaflet) => {
       setL(leaflet.default);
@@ -40,11 +40,11 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     };
   }, []);
 
-  // Continuous geotracking with watchPosition
+  
   const startWatchingLocation = () => {
     if (!navigator.geolocation) {
       setGeoError('Geolocation is not supported by your browser');
-      setUserCoords([0, 0]); // neutral world fallback
+      setUserCoords([0, 0]); 
       return;
     }
 
@@ -66,7 +66,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
         console.warn('⚠️ Geolocation error:', error.message);
         setGeoError(`GPS Offline: ${error.message}. Fallback to dynamic search.`);
         setLoading(false);
-        // Fallback to neutral center if no location set
+        
         if (!userCoords) {
           setUserCoords([0, 0]);
         }
@@ -87,7 +87,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     }
   }, [userCoords, L]);
 
-  // Map Initial Setup
+  
   useEffect(() => {
     if (!L || mapRef.current) return;
 
@@ -100,7 +100,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
 
     const map = L.map('leaflet-map-element', {
       center: initialCenter,
-      zoom: userCoords ? 14 : 2, // Zoom out if at neutral [0,0]
+      zoom: userCoords ? 14 : 2, 
       zoomControl: false,
     });
     
@@ -114,7 +114,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // Dynamic viewport bounds updates
+    
     const triggerViewportCallback = () => {
       if (onViewportChange && mapRef.current) {
         const bounds = mapRef.current.getBounds();
@@ -126,10 +126,10 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     map.on('moveend', triggerViewportCallback);
     map.on('zoomend', triggerViewportCallback);
 
-    // Initial trigger
+    
     setTimeout(triggerViewportCallback, 500);
 
-    // Blue GPS Pulse indicator
+    
     const pulseIcon = L.divIcon({
       className: 'custom-pulse-marker',
       html: `<div class="relative w-6 h-6 flex items-center justify-center">
@@ -151,7 +151,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     };
   }, [L]);
 
-  // Update user markers, accuracy circle, and zoom in/flyTo on location updates
+  
   useEffect(() => {
     if (!L || !mapRef.current || !userCoords) return;
 
@@ -164,7 +164,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
       userMarkerRef.current.setLatLng(userCoords);
     }
 
-    // Accuracy Circle
+    
     if (accuracyCircleRef.current) {
       mapRef.current.removeLayer(accuracyCircleRef.current);
     }
@@ -178,7 +178,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     }).addTo(mapRef.current);
   }, [L, userCoords, locationAccuracy]);
 
-  // Update complaint markers & heatmaps based on live properties
+  
   useEffect(() => {
     if (!L || !mapRef.current) return;
 
@@ -264,7 +264,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     }
   }, [L, complaints, heatmapMode]);
 
-  // OpenStreetMap Nominatim Geocoding Query Handler (Requirement 9)
+  
   const handleGeocodeSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -283,9 +283,9 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
         const lat = parseFloat(firstMatch.lat);
         const lng = parseFloat(firstMatch.lon);
         
-        // Relocate map center
+        
         setUserCoords([lat, lng]);
-        setLocationAccuracy(null); // Clear accuracy for manually searched centers
+        setLocationAccuracy(null); 
       } else {
         setGeoError('No location matches found. Please try another search query.');
       }
@@ -301,7 +301,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-cyber-border/60 shadow-inner">
       <div id="leaflet-map-element" className="w-full h-full min-h-[400px]"></div>
       
-      {/* HUD overlay */}
+      {}
       <div className="absolute top-4 left-4 z-[400] flex flex-col gap-2 pointer-events-none">
         <div className="bg-slate-950/85 px-4 py-2 rounded-xl border border-cyber-border/70 backdrop-blur-md">
           <span className="text-xs font-semibold uppercase tracking-wider text-cyber-accent glow-text-cyan">
@@ -319,7 +319,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
         )}
       </div>
 
-      {/* Geocoding Global Search HUD */}
+      {}
       <div className="absolute top-4 right-4 z-[400] flex flex-col items-end gap-2 max-w-[80%] sm:max-w-xs">
         <form onSubmit={handleGeocodeSearch} className="flex bg-slate-950/90 border border-cyber-border/80 rounded-xl p-1.5 backdrop-blur-md shadow-lg w-full">
           <input
@@ -342,7 +342,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
           </button>
         </form>
 
-        {/* Locate Me Floating Action Button */}
+        {}
         <button
           onClick={startWatchingLocation}
           disabled={loading}
@@ -357,7 +357,7 @@ export default function LeafletMap({ complaints = [], heatmapMode = false, onVie
         </button>
       </div>
 
-      {/* Geolocation Alert Banner */}
+      {}
       {geoError && (
         <div className="absolute bottom-4 left-4 right-16 z-[400] bg-cyber-danger/10 border border-cyber-danger/30 p-2.5 rounded-xl backdrop-blur-md text-[11px] text-cyber-danger flex items-center gap-2">
           <AlertCircle className="w-4 h-4 text-cyber-danger flex-shrink-0" />

@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,14 +14,14 @@ module.exports = {
       },
       colors: {
         editorial: {
-          bg: '#f7f6f0',        // Warm off-white/cream background
-          dark: '#1c1d1f',      // Soft charcoal black
-          card: 'rgba(255, 255, 255, 0.82)', // Soft light glass
-          border: 'rgba(28, 29, 31, 0.08)',  // Grayscale border
-          accent: '#0052cc',    // Elegant blue/cyan AI highlight
-          alert: '#cc3300',     // Muted red/amber emergency alert
-          success: '#1b8753',   // Muted emerald resolution green
-          grayLight: '#eae9e0'  // Slightly darker cream for contrast
+          bg: '#f7f6f0',        
+          dark: '#1c1d1f',      
+          card: 'rgba(255, 255, 255, 0.82)', 
+          border: 'rgba(28, 29, 31, 0.08)',  
+          accent: '#0052cc',    
+          alert: '#cc3300',     
+          success: '#1b8753',   
+          grayLight: '#eae9e0'  
         }
       },
       boxShadow: {

@@ -13,9 +13,9 @@ export default function AuthorityDashboard() {
   const [resolutionPreview, setResolutionPreview] = useState(null);
   const [isVerifying, setIsVerifying] = useState(false);
   const [similarityScore, setSimilarityScore] = useState(null);
-  const [activeTab, setActiveTab] = useState('queue'); // 'queue' or 'stats'
+  const [activeTab, setActiveTab] = useState('queue'); 
 
-  // Handle viewport bounds updates to dynamically generate mock complaints for heatmap
+  
   const handleViewportChange = (bounds, center) => {
     if (!bounds || !center) return;
     const southWest = bounds.getSouthWest();
@@ -60,7 +60,7 @@ export default function AuthorityDashboard() {
     setComplaints(generated);
   };
 
-  // Form states for complaint detail panel
+  
   const [dept, setDept] = useState('Public Works');
   const [currentStatus, setCurrentStatus] = useState('Reported');
 
@@ -121,14 +121,14 @@ export default function AuthorityDashboard() {
   return (
     <div className="space-y-6 py-6 font-sans">
       
-      {/* Header - Editorial serif */}
+      {}
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-editorial-border pb-6">
         <div>
           <h1 className="text-3xl md:text-5xl font-serif text-editorial-dark">Command Center</h1>
           <p className="text-sm text-slate-500 mt-1">Smart city operations, workforce dispatch, and visual resolution gateways.</p>
         </div>
 
-        {/* Tab triggers */}
+        {}
         <div className="flex bg-slate-200/60 p-0.5 rounded-xl border border-editorial-border font-bold text-xs self-start md:self-auto">
           <button
             onClick={() => setActiveTab('queue')}
@@ -149,10 +149,10 @@ export default function AuthorityDashboard() {
         </div>
       </div>
 
-      {/* Grid */}
+      {}
       <div className="grid lg:grid-cols-12 gap-6 items-start">
         
-        {/* Left Column: Dispatch Queue or Load Charts */}
+        {}
         <div className="lg:col-span-4 space-y-6">
           {activeTab === 'queue' ? (
             <div className="glass-panel p-6 rounded-3xl border border-editorial-border space-y-4 shadow-editorial">
@@ -219,7 +219,7 @@ export default function AuthorityDashboard() {
           )}
         </div>
 
-        {/* Right Column: details panel or Live Map */}
+        {}
         <div className="lg:col-span-8">
           {activeTab === 'queue' ? (
             selectedComplaint ? (
@@ -243,7 +243,7 @@ export default function AuthorityDashboard() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  {/* Left Side: Images */}
+                  {}
                   <div className="space-y-4">
                     <div>
                       <h4 className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Original Hazard Image</h4>
@@ -260,7 +260,7 @@ export default function AuthorityDashboard() {
                       )}
                     </div>
 
-                    {/* Resolution Upload */}
+                    {}
                     <div>
                       <h4 className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Resolution Verification Proof</h4>
                       {resolutionPreview ? (
@@ -275,7 +275,7 @@ export default function AuthorityDashboard() {
                           ) : (
                             similarityScore && (
                               <div className="p-3.5 bg-slate-900 border border-editorial-border rounded-xl font-mono text-[10px] space-y-1.5 text-slate-300">
-                                <p className="text-green-400 font-bold">// Verification Match Passed</p>
+                                <p className="text-green-400 font-bold"></p>
                                 <p>Grayscale Structural Similarity Index: <b className="text-white text-xs">{similarityScore}%</b></p>
                                 <button
                                   onClick={handleFinalResolve}
@@ -297,7 +297,7 @@ export default function AuthorityDashboard() {
                     </div>
                   </div>
 
-                  {/* Right Side: details & Actions */}
+                  {}
                   <div className="space-y-5 text-xs">
                     <div className="space-y-1">
                       <p className="font-bold text-slate-400 uppercase text-[10px] tracking-wider">Citizen Description:</p>

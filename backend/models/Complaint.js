@@ -31,7 +31,7 @@ const ComplaintSchema = new mongoose.Schema({
       default: 'Point'
     },
     coordinates: {
-      type: [Number], // [longitude, latitude]
+      type: [Number], 
       required: true
     }
   },
@@ -85,7 +85,7 @@ const ComplaintSchema = new mongoose.Schema({
   }
 });
 
-// Setup geospatial 2dsphere index on location field for radius query/heatmaps
+
 ComplaintSchema.index({ location: '2dsphere' });
 
 module.exports = mongoose.model('Complaint', ComplaintSchema);

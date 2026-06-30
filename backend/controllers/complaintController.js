@@ -6,7 +6,7 @@ const Notification = require('../models/Notification');
 
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:8000';
 
-// Mock AI Fallback Generator (Hackathon proof!)
+
 const generateMockAIResponse = (issueType) => {
   const categories = ['Pothole', 'Garbage Overflow', 'Water Leakage', 'Broken Road', 'Streetlight Damage', 'Sewage Issues'];
   const chosenType = issueType || categories[Math.floor(Math.random() * categories.length)];
@@ -40,29 +40,29 @@ exports.createComplaint = async (req, res, next) => {
       return res.status(400).json({ error: 'Valid GPS coordinates (latitude and longitude) are required' });
     }
 
-    // Call FastAPI AI Service
+    
     let aiResponse;
     try {
-      // Send image URL or mock detection request
+      
       const response = await axios.post(`${AI_SERVICE_URL}/api/v1/ai/detect`, {
         imageUrl: imageUrl,
         description: description,
-        issueType: issueType // User-selected type serves as hint or fallback
-      }, { timeout: 3000 }); // Fast timeout for responsiveness
+        issueType: issueType 
+      }, { timeout: 3000 }); 
       aiResponse = response.data;
     } catch (err) {
       console.warn('⚠️ AI service unavailable. Running fallback mock AI predictions...', err.message);
       aiResponse = generateMockAIResponse(issueType);
     }
 
-    // Construct complaint details combining AI analysis and citizen inputs
+    
     const complaint = new Complaint({
       issueType: aiResponse.issueType || issueType || 'Public Cleanliness',
       description,
       imageUrl,
       location: {
         type: 'Point',
-        coordinates: [lng, lat] // MongoDB requires [longitude, latitude]
+        coordinates: [lng, lat] 
       },
       severity: aiResponse.severity || 'Medium',
       createdBy: userId,
@@ -75,12 +75,12 @@ exports.createComplaint = async (req, res, next) => {
 
     await complaint.save();
 
-    // Reward points for filing a report
+    
     const user = await User.findById(userId);
     if (user) {
-      user.heroPoints += 15; // 15 points for submitting
+      user.heroPoints += 15; 
       user.reportsSubmitted += 1;
-      // Award "First Reporter" badge if appropriate
+      
       if (user.reportsSubmitted === 1) {
         user.badges.push({
           title: 'Civic Initiator',
@@ -90,7 +90,7 @@ exports.createComplaint = async (req, res, next) => {
       await user.save();
     }
 
-    // Create system notification
+    
     const notification = new Notification({
       userId,
       title: 'Report Filed',
@@ -98,7 +98,7 @@ exports.createComplaint = async (req, res, next) => {
     });
     await notification.save();
 
-    // Notify authorities and nearby citizens via Socket.IO
+    
     if (req.io) {
       req.io.emit('new_complaint', {
         id: complaint._id,
@@ -107,7 +107,7 @@ exports.createComplaint = async (req, res, next) => {
         coordinates: [lat, lng],
         summary: complaint.aiAnalysis.summary
       });
-      // Emit update notification to user specifically
+      
       req.io.to(userId.toString()).emit('notification', {
         title: 'Report Filed Successfully',
         message: `AI predicted priority: ${complaint.severity}`
@@ -125,7 +125,7 @@ exports.createComplaint = async (req, res, next) => {
 
 exports.getComplaints = async (req, res, next) => {
   try {
-    const { status, lat, lng, radius = 5000, issueType } = req.query; // Radius in meters (default 5km)
+    const { status, lat, lng, radius = 5000, issueType } = req.query; 
     let query = {};
 
     if (status) {
@@ -135,7 +135,7 @@ exports.getComplaints = async (req, res, next) => {
       query.issueType = issueType;
     }
 
-    // Nearby Geospatial search
+    
     if (lat && lng) {
       query.location = {
         $near: {
@@ -188,7 +188,7 @@ exports.verifyComplaint = async (req, res, next) => {
       return res.status(404).json({ error: 'Complaint not found' });
     }
 
-    // Prevent double verification
+    
     if (complaint.verifiedBy.includes(userId)) {
       return res.status(400).json({ error: 'You have already verified this complaint' });
     }
@@ -196,16 +196,16 @@ exports.verifyComplaint = async (req, res, next) => {
     complaint.verifiedBy.push(userId);
     complaint.verificationCount += 1;
 
-    // Upvote urgency too
+    
     if (!complaint.upvotes.includes(userId)) {
       complaint.upvotes.push(userId);
     }
 
-    // Promote to "Verified" if threshold met (e.g. 2 verifications)
+    
     if (complaint.status === 'Reported' && complaint.verificationCount >= 2) {
       complaint.status = 'Verified';
       
-      // Notify creator
+      
       const creatorNotification = new Notification({
         userId: complaint.createdBy,
         title: 'Report Verified',
@@ -216,14 +216,14 @@ exports.verifyComplaint = async (req, res, next) => {
 
     await complaint.save();
 
-    // Reward verifier
+    
     const verifier = await User.findById(userId);
     if (verifier) {
       verifier.heroPoints += 5;
       await verifier.save();
     }
 
-    // Reward reporter extra validation bonus points
+    
     if (complaint.verificationCount === 2) {
       const reporter = await User.findById(complaint.createdBy);
       if (reporter) {
@@ -232,7 +232,7 @@ exports.verifyComplaint = async (req, res, next) => {
       }
     }
 
-    // Broadcast update
+    
     if (req.io) {
       req.io.emit('complaint_updated', {
         id: complaint._id,
@@ -270,7 +270,7 @@ exports.addComment = async (req, res, next) => {
 
     await comment.save();
 
-    // Populate user info for immediate frontend insertion
+    
     const populatedComment = await Comment.findById(comment._id).populate('userId', 'name role heroPoints');
 
     res.status(201).json(populatedComment);
@@ -296,12 +296,12 @@ exports.updateComplaintStatus = async (req, res, next) => {
       complaint.status = status;
       complaint.updatedAt = Date.now();
 
-      // Check if status is Resolved and a before/after image is uploaded
+      
       if (status === 'Resolved') {
         if (req.file) {
           complaint.resolvedImageUrl = `/uploads/${req.file.filename}`;
           
-          // Request Before/After verification score from FastAPI AI Service
+          
           try {
             const response = await axios.post(`${AI_SERVICE_URL}/api/v1/ai/verify-resolution`, {
               beforeUrl: complaint.imageUrl,
@@ -310,17 +310,17 @@ exports.updateComplaintStatus = async (req, res, next) => {
             complaint.aiAnalysis.beforeAfterScore = response.data.similarityScore;
           } catch (err) {
             console.warn('⚠️ AI comparison unavailable. Mocking Before/After verification...', err.message);
-            // Default hackathon mock score indicating successful resolution (e.g. 0.88 structural change index)
+            
             complaint.aiAnalysis.beforeAfterScore = parseFloat((0.80 + Math.random() * 0.18).toFixed(2));
           }
         }
 
-        // Award resolution bonus points to the original reporter
+        
         const reporter = await User.findById(complaint.createdBy);
         if (reporter) {
-          reporter.heroPoints += 50; // 50 bonus hero points!
+          reporter.heroPoints += 50; 
           if (reporter.heroPoints >= 200) {
-            // Award Badge: Community Hero
+            
             const hasHeroBadge = reporter.badges.some(b => b.title === 'Community Hero');
             if (!hasHeroBadge) {
               reporter.badges.push({
@@ -332,7 +332,7 @@ exports.updateComplaintStatus = async (req, res, next) => {
           await reporter.save();
         }
 
-        // Send notification to the reporter
+        
         const resolutionNotification = new Notification({
           userId: complaint.createdBy,
           title: 'Issue Resolved!',
@@ -340,7 +340,7 @@ exports.updateComplaintStatus = async (req, res, next) => {
         });
         await resolutionNotification.save();
       } else {
-        // Standard notification for progress updates
+        
         const progressNotification = new Notification({
           userId: complaint.createdBy,
           title: 'Complaint Update',
@@ -352,7 +352,7 @@ exports.updateComplaintStatus = async (req, res, next) => {
 
     await complaint.save();
 
-    // Broadcast status change
+    
     if (req.io) {
       req.io.emit('complaint_updated', {
         id: complaint._id,

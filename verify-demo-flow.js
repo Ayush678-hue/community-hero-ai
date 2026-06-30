@@ -1,10 +1,6 @@
-/**
- * Community Hero AI - End-to-End Demo Sequence Verification Script
- * This script runs a mock simulation of the entire civic problem reporting and resolution flow,
- * verifying that controllers, schemas, points allocation, and AI routing behave as designed.
- */
 
-// Mock AI Response Generator defined locally for standalone runner
+
+
 const generateMockAIResponse = (issueType) => {
   return {
     success: true,
@@ -18,7 +14,7 @@ const generateMockAIResponse = (issueType) => {
 
 console.log('🏁 Starting Community Hero AI Demo Sequence Verification...\n');
 
-// 1. Setup Mock Users
+
 const citizen = {
   id: 'citizen_123',
   name: 'Aria Chen',
@@ -47,7 +43,7 @@ console.log(`   - Authority "${authority.name}" logged in`);
 console.log(`   - Neighbor "${neighbor.name}" active nearby`);
 console.log('--------------------------------------------------\n');
 
-// 2. Citizen Reports a Pothole
+
 console.log('📸 [Step 2: Citizen Files Complaint]');
 const reportData = {
   issueType: 'Pothole',
@@ -60,11 +56,11 @@ console.log(`   - Filing report: "${reportData.issueType}" at coords [${reportDa
 console.log(`   - Uploading image: "${reportData.imageUrl}"`);
 console.log('--------------------------------------------------\n');
 
-// 3. AI Service Object Detection & Prioritization
+
 console.log('🤖 [Step 3: AI Computer Vision Inference]');
 console.log('   - Contacting FastAPI AI Microservice /api/v1/ai/detect...');
 
-// Simulatingcalculate_severity_and_summary from FastAPI
+
 const desc_lower = reportData.description.lowerCode || reportData.description.toLowerCase();
 let severity = 'High';
 if (desc_lower.includes('school') || desc_lower.includes('hospital') || desc_lower.includes('hazard')) {
@@ -83,13 +79,13 @@ console.log(`   - [AI Output] Class: ${aiResponse.issueType} (Confidence: ${aiRe
 console.log(`   - [AI Output] Priority: ${aiResponse.severity}`);
 console.log(`   - [AI Output] Summary: "${aiResponse.summary}"`);
 
-// Apply submit reward points
+
 citizen.heroPoints += 15;
 citizen.reportsSubmitted += 1;
 console.log(`   - Awarded +15 Hero Points to ${citizen.name} (New balance: ${citizen.heroPoints})`);
 console.log('--------------------------------------------------\n');
 
-// 4. Neighbors verify and upvote the hazard
+
 console.log('👥 [Step 4: Neighborhood Verification]');
 const complaintState = {
   _id: 'complaint_pothole_101',
@@ -101,13 +97,13 @@ const complaintState = {
   upvotes: []
 };
 
-// Neighbor 1 verifies
+
 complaintState.verificationCount += 1;
 complaintState.verifiedBy.push(neighbor.id);
 neighbor.heroPoints += 5;
 console.log(`   - Neighbor "${neighbor.name}" verified the issue (+5 points, new balance: ${neighbor.heroPoints})`);
 
-// Neighbor 2 verifies -> Status becomes "Verified"
+
 complaintState.verificationCount += 1;
 complaintState.verifiedBy.push('neighbor_2');
 complaintState.status = 'Verified';
@@ -116,7 +112,7 @@ console.log(`   - Citizen "${citizen.name}" awarded +10 verification bonus point
 citizen.heroPoints += 10;
 console.log('--------------------------------------------------\n');
 
-// 5. Authority routes and manages resolution
+
 console.log('🏢 [Step 5: Authority Workplace Routing]');
 complaintState.assignedDepartment = 'Public Works (Roads)';
 complaintState.status = 'In Progress';
@@ -124,7 +120,7 @@ console.log(`   - Authority assigned task to: "${complaintState.assignedDepartme
 console.log(`   - Workforce dispatched. Status: "${complaintState.status}"`);
 console.log('--------------------------------------------------\n');
 
-// 6. Resolution & Before/After comparison
+
 console.log('🔧 [Step 6: Resolution Verification]');
 console.log('   - Road repairs completed by workforce.');
 const resolutionData = {
@@ -133,8 +129,8 @@ const resolutionData = {
 };
 console.log(`   - Uploading resolution proof image: "${resolutionData.resolvedImageUrl}"`);
 
-// FastAPI Before/after SSIM match
-const beforeAfterScore = 0.89; // 89% match (repaired)
+
+const beforeAfterScore = 0.89; 
 complaintState.status = 'Resolved';
 complaintState.resolvedImageUrl = resolutionData.resolvedImageUrl;
 complaintState.aiAnalysisBeforeAfter = beforeAfterScore;
@@ -143,7 +139,7 @@ console.log(`   - Running Before/After Comparison AI...`);
 console.log(`   - [AI Output] Match Score: ${beforeAfterScore * 100}% (Visual check passed)`);
 console.log(`   - Status updated: "${complaintState.status}"`);
 
-// Award resolution bonus points
+
 citizen.heroPoints += 50;
 console.log(`   - Awarded +50 Hero Points to original reporter "${citizen.name}" (Final balance: ${citizen.heroPoints})`);
 if (citizen.heroPoints >= 200) {
@@ -152,7 +148,7 @@ if (citizen.heroPoints >= 200) {
 }
 console.log('--------------------------------------------------\n');
 
-// 7. Verify Leaderboard
+
 console.log('🏆 [Step 7: Leaderboard Update]');
 const leaderboard = [
   { name: citizen.name, points: citizen.heroPoints, badges: citizen.badges.map(b => b.title) },

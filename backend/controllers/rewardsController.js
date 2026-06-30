@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 exports.getLeaderboard = async (req, res, next) => {
   try {
-    // Return top 10 users based on heroPoints
+    
     const topUsers = await User.find({ role: 'citizen' })
       .select('name email heroPoints badges reportsSubmitted')
       .sort({ heroPoints: -1 })

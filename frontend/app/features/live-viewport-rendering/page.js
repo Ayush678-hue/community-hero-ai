@@ -6,12 +6,12 @@ import { ArrowLeft, Map, Search, Radio, Wifi } from 'lucide-react';
 export default function LiveViewportRenderingPage() {
   return (
     <div className="space-y-8 py-10 max-w-4xl mx-auto font-sans select-none">
-      {/* Back button */}
+      {}
       <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-editorial-accent hover:underline">
         <ArrowLeft className="w-4 h-4" /> Back to Terminal Hub
       </Link>
 
-      {/* Header */}
+      {}
       <div className="flex items-center gap-4 border-b border-editorial-border pb-6">
         <div className="w-14 h-14 rounded-2xl bg-editorial-dark flex items-center justify-center shadow-lg">
           <Map className="w-6 h-6 text-editorial-bg" />
@@ -22,10 +22,10 @@ export default function LiveViewportRenderingPage() {
         </div>
       </div>
 
-      {/* Deep-dive content */}
+      {}
       <div className="grid md:grid-cols-12 gap-8">
         
-        {/* Left main text column */}
+        {}
         <div className="md:col-span-8 space-y-6">
           <div className="glass-panel p-6 rounded-3xl border border-editorial-border space-y-4 shadow-editorial">
             <h2 className="text-xl font-serif font-bold text-editorial-dark flex items-center gap-2">
@@ -58,14 +58,14 @@ export default function LiveViewportRenderingPage() {
           </div>
         </div>
 
-        {/* Right HUD column */}
+        {}
         <div className="md:col-span-4 space-y-6">
           <div className="glass-panel p-5 rounded-2xl border border-editorial-border bg-slate-50 font-mono text-[9px] space-y-3">
             <div className="flex items-center justify-between border-b border-editorial-border pb-2 text-editorial-accent font-bold">
               <span>📡 geolocation_watch_config</span>
             </div>
             <div className="space-y-1 text-slate-500">
-              <p className="text-slate-400">// Continuous geotracking params</p>
+              <p className="text-slate-400"></p>
               <p>enableHighAccuracy: true</p>
               <p>maximumAge: 0</p>
               <p>timeout: 15000</p>
@@ -78,7 +78,7 @@ export default function LiveViewportRenderingPage() {
               <span>🔌 socket_io_payload</span>
             </div>
             <div className="space-y-1 text-slate-500">
-              <p className="text-slate-400">// WebSockets event emit</p>
+              <p className="text-slate-400"></p>
               <p>io.emit('new_complaint', &#123;</p>
               <p className="pl-3">id: "complaint_101",</p>
               <p className="pl-3">coords: [37.7799, -122.4194],</p>
